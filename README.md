@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
+
+A modern, minimalist portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Black minimalist design** with elegant typography
+- **Animated background** with flowing cyan/blue wireframe waves
+- **3D layered project cards** with hover effects and glow
+- **Responsive grid layout** (3 columns → 2 columns → 1 column)
+- **Smooth scroll animations** powered by Framer Motion
+- **Admin panel** at `/admin` for managing projects
+- **localStorage** for data persistence
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Three.js ecosystem (@react-three/fiber, @react-three/drei)
 
 ## Getting Started
 
-First, run the development server:
-
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages
 
-## Learn More
+- `/` - Main portfolio page with project showcase
+- `/admin` - Admin panel for managing projects (add, edit, delete)
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+├── page.tsx          # Main portfolio page
+├── admin/
+│   └── page.tsx      # Admin panel
+├── layout.tsx        # Root layout
+└── globals.css       # Global styles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+components/
+├── ProjectCard.tsx          # Project card with 3D effect
+├── AnimatedBackground.tsx   # Animated wireframe background
+└── Footer.tsx               # Footer with LinkedIn link
+
+lib/
+├── projects.ts       # Dummy project data (temporary)
+└── localStorage.ts   # localStorage utilities
+
+types/
+└── index.ts          # TypeScript interfaces
+```
+
+## Admin Panel Usage
+
+1. Navigate to `/admin`
+2. Fill in the form to add a new project:
+   - Title (required)
+   - Description (required)
+   - Image URL (optional)
+   - Project Link (optional)
+   - Tags (click "Add" or press Enter)
+3. Click "Add Project" to save
+4. Manage existing projects with Edit/Delete buttons
+
+## Data Storage
+
+Currently using localStorage for data persistence. Projects are stored in the browser and will persist across sessions. To migrate to a database later, update the functions in `lib/localStorage.ts`.
+
+## Design Notes
+
+- The design follows the proto.png reference with:
+  - Deep black background (#000000)
+  - Layered white cards with rounded corners (2rem radius)
+  - Cyan/blue animated wireframe background
+  - Elegant "Portofolio" heading with wide letter spacing
+  - LinkedIn footer with CTA text
 
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
