@@ -95,9 +95,12 @@ export default function AdminPage() {
     images: [],
     tags: [],
     link: '',
+    githubUrl: '',
+    features: [],
   });
   const [tagInput, setTagInput] = useState('');
   const [imageInput, setImageInput] = useState('');
+  const [featureInput, setFeatureInput] = useState('');
 
   // DnD Sensors
   const sensors = useSensors(
@@ -173,9 +176,12 @@ export default function AdminPage() {
       images: [],
       tags: [],
       link: '',
+      githubUrl: '',
+      features: [],
     });
     setTagInput('');
     setImageInput('');
+    setFeatureInput('');
     setIsEditing(false);
   };
 
@@ -210,6 +216,23 @@ export default function AdminPage() {
     setCurrentProject({
       ...currentProject,
       images: currentProject.images?.filter((_, i) => i !== index),
+    });
+  };
+
+  const addFeature = () => {
+    if (featureInput.trim()) {
+      setCurrentProject({
+        ...currentProject,
+        features: [...(currentProject.features || []), featureInput.trim()],
+      });
+      setFeatureInput('');
+    }
+  };
+
+  const removeFeature = (index: number) => {
+    setCurrentProject({
+      ...currentProject,
+      features: currentProject.features?.filter((_, i) => i !== index),
     });
   };
 
@@ -268,7 +291,7 @@ export default function AdminPage() {
                 </label>
                 <input
                   type="text"
-                  value={currentProject.title}
+                  value={currentProject.title || ''}
                   onChange={(e) =>
                     setCurrentProject({ ...currentProject, title: e.target.value })
                   }
@@ -283,7 +306,7 @@ export default function AdminPage() {
                   Description *
                 </label>
                 <textarea
-                  value={currentProject.description}
+                  value={currentProject.description || ''}
                   onChange={(e) =>
                     setCurrentProject({
                       ...currentProject,
@@ -349,16 +372,31 @@ export default function AdminPage() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-300">
-                  Project Link
+                  Live Demo Link
                 </label>
                 <input
                   type="text"
-                  value={currentProject.link}
+                  value={currentProject.link || ''}
                   onChange={(e) =>
                     setCurrentProject({ ...currentProject, link: e.target.value })
                   }
                   className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                   placeholder="https://example.com"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-300">
+                  GitHub URL
+                </label>
+                <input
+                  type="text"
+                  value={currentProject.githubUrl || ''}
+                  onChange={(e) =>
+                    setCurrentProject({ ...currentProject, githubUrl: e.target.value })
+                  }
+                  className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  placeholder="https://github.com/username/repo"
                 />
               </div>
 
@@ -398,6 +436,49 @@ export default function AdminPage() {
                         ×
                       </button>
                     </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* KEY FEATURES */}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-gray-300">
+                  Key Features
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={featureInput}
+                    onChange={(e) => setFeatureInput(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
+                    className="flex-1 rounded-lg bg-white/10 px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    placeholder="Add a key feature"
+                  />
+                  <button
+                    type="button"
+                    onClick={addFeature}
+                    className="rounded-lg bg-cyan-500 px-4 py-2 text-white hover:bg-cyan-600 transition-colors"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="mt-2 space-y-2">
+                  {currentProject.features?.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start justify-between rounded-lg bg-white/10 px-3 py-2"
+                    >
+                      <span className="flex-1 text-sm text-gray-300">
+                        • {feature}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeFeature(index)}
+                        className="ml-2 text-red-400 hover:text-red-300"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
                   ))}
                 </div>
               </div>

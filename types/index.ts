@@ -6,4 +6,6 @@ export interface Project {
   images: string[];  // NEW: Array of all images
   tags: string[];
   link?: string;
+  githubUrl?: string;
+  features?: string[];
 }

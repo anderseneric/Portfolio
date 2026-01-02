@@ -22,8 +22,8 @@ export default function Home() {
   }, []);
 
   const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
+    // Navigate to project details page
+    window.location.href = `/projects/${project.id}`;
   };
 
   const handleCloseModal = () => {
