@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, Github, X } from 'lucide-react';
 import { Project } from '@/types';
 import { getProjects } from '@/lib/localStorage';
+import { dummyProjects } from '@/lib/projects';
 import TechBackground from '@/components/TechBackground';
 import ReactMarkdown from 'react-markdown';
 
@@ -18,8 +19,10 @@ export default function ProjectDetailPage() {
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
 
   useEffect(() => {
-    const projects = getProjects();
-    const foundProject = projects.find((p) => p.id === params.id);
+    // Check localStorage first, then fall back to dummy projects
+    const storedProjects = getProjects();
+    const allProjects = storedProjects.length > 0 ? storedProjects : dummyProjects;
+    const foundProject = allProjects.find((p) => p.id === params.id);
     setProject(foundProject || null);
   }, [params.id]);
 
