@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portofolio - Eric Andersen",
+  title: "Portfolio - Eric Andersen",
   description: "Portfolio showcase of projects and work by Eric Andersen",
 };
 

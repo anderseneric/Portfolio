@@ -84,7 +84,7 @@ Currently using localStorage for data persistence. Projects are stored in the br
   - Deep black background (#000000)
   - Layered white cards with rounded corners (2rem radius)
   - Cyan/blue animated wireframe background
-  - Elegant "Portofolio" heading with wide letter spacing
+  - Elegant "Portfolio" heading with wide letter spacing
   - LinkedIn footer with CTA text
 
 ## Deploy on Vercel
